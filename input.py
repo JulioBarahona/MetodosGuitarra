@@ -3,7 +3,8 @@
 Created on Wed Nov 22 17:34:58 2017
 
 @author: Julio
-""""""PyAudio example: Record a few seconds of audio and save to a WAVE file."""
+PyAudio example: Record a few seconds of audio and save to a WAVE file.
+"""
 #Con este modulo se obtiene el audio del mic
 
 def getAudio():

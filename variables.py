@@ -6,4 +6,4 @@ Created on Wed Nov 22 17:56:35 2017
 """
 
 appTitle = "Afinador de guitarra"
-guitarStrings = ["E","A","D","B","B","E","Salir"]
+guitarStrings = ["E1","A","D","G","B","E2","Salir"]
