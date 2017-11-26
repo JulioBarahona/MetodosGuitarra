@@ -6,19 +6,10 @@ Created on Wed Nov 22 17:57:15 2017
 """
 from easygui import *
 from variables import *
+from functions import *
 
 def transform(acorde):
-    if(acorde == "E1"):
-        msgbox("E1",appTitle)
-    elif(acorde == "A"):
-        msgbox("A", appTitle)
-    elif(acorde == "D"):
-        msgbox("D", appTitle)
-    elif(acorde == "G"):
-        msgbox("G", appTitle)
-    elif(acorde == "B"):
-        msgbox("B", appTitle)
-    elif(acorde == "E2"):
-        msgbox("E2", appTitle)
-    else:
-        print("rekt")
+    #defines the note of the button selected
+    nota = tunes[acorde]
+    getAudio()
+    filter()

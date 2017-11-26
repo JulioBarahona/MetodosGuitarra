@@ -5,8 +5,10 @@ Created on Wed Nov 22 17:34:58 2017
 @author: Julio
 PyAudio example: Record a few seconds of audio and save to a WAVE file.
 """
-#Con este modulo se obtiene el audio del mic
+from pylab import *
+import scipy.io.wavfile as wav
 
+#Con esta funcion se obtiene el audio del mic
 def getAudio():
     import pyaudio
     import wave
@@ -14,7 +16,7 @@ def getAudio():
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
-    RECORD_SECONDS = 5
+    RECORD_SECONDS = 2
     WAVE_OUTPUT_FILENAME = "output.wav"
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT,
@@ -35,3 +37,26 @@ def getAudio():
     wf.setframerate(RATE)
     wf.writeframes(b''.join(frames))
     wf.close()
+
+# con esta funcion se limpia el ruido
+def filter():
+
+
+    srate, data = wav.read("output.wav")
+
+    N = len(data)
+    X = fft(data)
+    X_mag = abs(X) * 2.0 / N
+
+    freq = fftfreq(N, 1.0 / srate)
+    plot(freq, X_mag)
+
+    X = where((abs(X) * 2.0 / N) > 350, X, 0)
+    X_mag = abs(X) * 2.0 / N
+    freq = fftfreq(N, 1.0 / srate)
+    plot(freq, X_mag)
+
+    # agarra solo la parte imaginaria de los datos
+    data2 = real(ifft(X))
+    data2 = data2.astype(int16)
+    wav.write("output_filtered.wav", srate, data2)
