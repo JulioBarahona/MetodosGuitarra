@@ -11,7 +11,7 @@ msgbox(welcome,appTitle)
 
 flag = True
 while(flag):
-    button = buttonbox ("Escoja la cuerda", appTitle, guitarStrings)
+    button = buttonbox (instructionsTuner, appTitle, guitarStrings)
     if (button == "Salir"):
         flag = False
     else:

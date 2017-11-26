@@ -9,6 +9,7 @@ from variables import *
 from functions import *
 
 def transform(acorde):
+    msgbox(recordingInstructions,appTitle)
     #defines the note of the button selected
     nota = tunes[acorde]
     #records audio
