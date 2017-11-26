@@ -7,11 +7,13 @@ PyAudio example: Record a few seconds of audio and save to a WAVE file.
 """
 from pylab import *
 import scipy.io.wavfile as wav
+import pyaudio
+import wave
 
-#Con esta funcion se obtiene el audio del mic
+#Con esta funcion se obtiene el audio del mic,
+#basado en https://stackoverflow.com/questions/35344649/reading-input-sound-signal-using-python
 def getAudio():
-    import pyaudio
-    import wave
+
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
@@ -38,10 +40,8 @@ def getAudio():
     wf.writeframes(b''.join(frames))
     wf.close()
 
-# con esta funcion se limpia el ruido
+# con esta funcion se limpia el ruido, tomado del ejemplo dado por aristodon
 def filter():
-
-
     srate, data = wav.read("output.wav")
 
     N = len(data)
@@ -51,6 +51,7 @@ def filter():
     freq = fftfreq(N, 1.0 / srate)
     plot(freq, X_mag)
 
+    #limpia que tengan una intensidad menor a 350?
     X = where((abs(X) * 2.0 / N) > 350, X, 0)
     X_mag = abs(X) * 2.0 / N
     freq = fftfreq(N, 1.0 / srate)

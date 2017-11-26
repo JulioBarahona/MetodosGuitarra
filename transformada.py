@@ -11,5 +11,7 @@ from functions import *
 def transform(acorde):
     #defines the note of the button selected
     nota = tunes[acorde]
+    #records audio
     getAudio()
+    #filters audio
     filter()
