@@ -51,7 +51,7 @@ def filter():
     freq = fftfreq(N, 1.0 / srate)
     plot(freq, X_mag)
 
-    #limpia que tengan una intensidad menor a 350?
+    #limpia que tengan una intensidad menor a 350
     X = where((abs(X) * 2.0 / N) > 350, X, 0)
     X_mag = abs(X) * 2.0 / N
     freq = fftfreq(N, 1.0 / srate)
