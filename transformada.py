@@ -12,10 +12,8 @@ def transform(string):
     msgbox(recordingInstructions,appTitle)
     #defines the note of the button selected
     tune = tunes[string]
-
     #records audio
     getAudio()
-
     #filters audio
     filter()
 
@@ -35,6 +33,7 @@ def transform(string):
     # if the pitch is too low it will tell
     elif(pitch+5 < tune):
         msgbox(pitchtoolow, appTitle)
+        button = buttonbox("Que desea hacer?", appTitle, tunningOptions)
         transform(string)
     #it the pitch isnt too high or too low then its ready to go
     else:

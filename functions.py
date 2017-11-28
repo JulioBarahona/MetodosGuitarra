@@ -9,8 +9,6 @@ from pylab import *
 import scipy.io.wavfile as wav
 import pyaudio
 import wave
-from transformada import *
-
 
 #Con esta funcion se obtiene el audio del mic,
 #basado en https://stackoverflow.com/questions/35344649/reading-input-sound-signal-using-python
@@ -20,7 +18,7 @@ def getAudio():
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
-    RECORD_SECONDS = 2
+    RECORD_SECONDS = 1
     WAVE_OUTPUT_FILENAME = "output.wav"
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT,
@@ -63,20 +61,3 @@ def filter():
     data2 = real(ifft(X))
     data2 = data2.astype(int16)
     wav.write("output_filtered.wav", srate, data2)
-
-def tunningPitche(userChoice):
-    if(userChoice == "Afinar otra cuerda"):
-        Proyecton()
-
-
-#GUI principal
-def Proyecton():
-    msgbox(welcome,appTitle)
-    flag = True
-    while(flag):
-        button = buttonbox (instructionsTuner, appTitle, guitarStrings)
-        if (button == "Salir"):
-            flag = False
-        else:
-            transform(button)
-    msgbox(goodbye,appTitle)
