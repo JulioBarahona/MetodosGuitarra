@@ -22,8 +22,7 @@ def transform(string):
     ACA TIENE QUE ESTAR LA PARTE EN DONDE SE DETERMINA QUE FRECUENCIA ES LA QUE SE TOMO DE LA CUERDA
     LA FRECUENCUA TIENE QUE ESTAR GRABADA CON EL NOMBRE DE VARIABLE PITCH 
     """
-    pitch = 1000
-
+    pitch = getTunes()
 
     #if the pitch is too high it will tell and calls the function again
     if (pitch-5 > tune):

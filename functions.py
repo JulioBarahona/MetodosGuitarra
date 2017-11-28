@@ -40,7 +40,7 @@ def getAudio():
     wf.writeframes(b''.join(frames))
     wf.close()
 
-# con esta funcion se limpia el ruido, tomado del ejemplo dado por aristodon
+# con esta funcion se limpia el ruido, tomado del ejemplo dado por aristondo
 def filter():
     srate, data = wav.read("output.wav")
 
@@ -61,3 +61,51 @@ def filter():
     data2 = real(ifft(X))
     data2 = data2.astype(int16)
     wav.write("output_filtered.wav", srate, data2)
+
+def getTunes():
+    # convierte el archivo en una lista para poder ser analizado
+    srate, data = wav.read("output_filtered.wav")
+
+    # convierte los datos en una lista de datos obtenisods
+    n = len(data)
+    x = fft(data)
+
+    # convierte los datos en valores absolutos
+    x_mag = abs(x) * 2.0 / n
+
+    # se obtiene la transformada de fourier rapida de los datos
+    freq = fftfreq(n, 1.0 / srate)
+
+    # se separa en partes iguales la marcacion del numero para poder saber cuales fueron de primero
+    datoPorNumero = np.split(data, 8)
+
+    # se prepara una lista para almacenar los datos de la transformada
+    nList = []
+    xList = []
+
+    # lsita de magnitdes
+    x_magList = []
+
+    # lista de frecuencias
+    freqList = []
+
+    for i in range(8):
+        nList.append(len(datoPorNumero[i]))
+        xList.append(fft(datoPorNumero[i]))
+        x_magList.append(abs(xList[i]) * 2.0 / nList[i])
+        freqList.append(fftfreq(nList[i], 1.0 / srate))
+
+    numeroDeTelefono = ""
+
+    for i in range(8):
+
+        for j in range(len(x_magList[i])):
+            if (x_magList[i][j] > 25):
+                if (freqList[i][j] > 0):
+                    if (freqList[i][j] < 1000):
+                        inferior = freqList[i][j]
+                    if (freqList[i][j] > 1000):
+                        superior = freqList[i][j]
+                        numeroDeTelefono = numeroDeTelefono + str(frecuencia(inferior, superior))
+
+    print("El numero ingresado fue: " + numeroDeTelefono)
