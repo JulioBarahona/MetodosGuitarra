@@ -16,9 +16,9 @@ def getAudio():
 
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
-    CHANNELS = 2
+    CHANNELS = 1
     RATE = 44100
-    RECORD_SECONDS = 1
+    RECORD_SECONDS = 3
     WAVE_OUTPUT_FILENAME = "output.wav"
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT,
@@ -51,8 +51,12 @@ def filter():
     freq = fftfreq(N, 1.0 / srate)
     plot(freq, X_mag)
 
-    #limpia que tengan una intensidad menor a 350
-    X = where((abs(X) * 2.0 / N) > 350, X, 0)
+    figure(2)
+    X = where(abs(freq) < 1000, X, 0)
+    X_mag = abs(X) * 2.0 / N
+    plot(freq, X_mag)
+
+    X = where((abs(X) * 2.0 / N) > 5, X, 0)
     X_mag = abs(X) * 2.0 / N
     freq = fftfreq(N, 1.0 / srate)
     plot(freq, X_mag)
@@ -61,6 +65,9 @@ def filter():
     data2 = real(ifft(X))
     data2 = data2.astype(int16)
     wav.write("output_filtered.wav", srate, data2)
+
+    plot(data2)
+
 
 def getTunes():
     # convierte el archivo en una lista para poder ser analizado
