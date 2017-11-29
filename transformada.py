@@ -8,8 +8,20 @@ from easygui import *
 from variables import *
 from functions import *
 
+def Proyecton():
+    #GUI principal
+    msgbox(welcome,appTitle)
+    flag = True
+    while(flag):
+        button = buttonbox (instructionsTuner, appTitle, guitarStrings)
+        if (button == "Salir"):
+            flag = False
+        else:
+            transform(button)
+    msgbox(goodbye, appTitle)
+
 def transform(string):
-    msgbox(recordingInstructions,appTitle)
+    msgbox(recordingInstructions,string)
     #defines the note of the button selected
     tune = tunes[string]
     #records audio
@@ -22,13 +34,11 @@ def transform(string):
 
     #if the pitch is too high it will tell and calls the function again
     if (pitch-5 > tune):
-        msgbox(pitchtoohigh + " " + str(pitch), appTitle)
-        button = buttonbox("Que desea hacer?", appTitle, tunningOptions)
+        msgbox(pitchtoohigh + " " + str(pitch) + " Hz", appTitle)
         transform(string)
     # if the pitch is too low it will tell
     elif(pitch+5 < tune):
-        msgbox(pitchtoolow + " " + str(pitch), appTitle)
-        button = buttonbox("Que desea hacer?", appTitle, tunningOptions)
+        msgbox(pitchtoolow + " " + str(pitch) + " Hz", appTitle)
         transform(string)
     #it the pitch isnt too high or too low then its ready to go
     else:

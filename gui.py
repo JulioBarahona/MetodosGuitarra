@@ -9,16 +9,5 @@ from easygui import *
 from variables import *
 from transformada import *
 
-def Proyecton():
-    #GUI principal
-    msgbox(welcome,appTitle)
-    flag = True
-    while(flag):
-        button = buttonbox (instructionsTuner, appTitle, guitarStrings)
-        if (button == "Salir"):
-            flag = False
-        else:
-            transform(button)
-    msgbox(goodbye, appTitle)
 
 Proyecton()
