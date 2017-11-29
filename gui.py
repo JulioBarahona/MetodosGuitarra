@@ -19,6 +19,6 @@ def Proyecton():
             flag = False
         else:
             transform(button)
-    msgbox(goodbye,appTitle)
+    msgbox(goodbye, appTitle)
 
 Proyecton()

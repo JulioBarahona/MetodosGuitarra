@@ -17,22 +17,17 @@ def transform(string):
     #filters audio
     filter()
 
-    """
-    el archivo de donde se saca la frecuencia se llama output_filtered.wav
-    ACA TIENE QUE ESTAR LA PARTE EN DONDE SE DETERMINA QUE FRECUENCIA ES LA QUE SE TOMO DE LA CUERDA
-    LA FRECUENCUA TIENE QUE ESTAR GRABADA CON EL NOMBRE DE VARIABLE PITCH 
-    """
-    #pitch = getTunes()
-    pitch = 150
+    #gets The Tune playing
+    pitch = getTunes()
 
     #if the pitch is too high it will tell and calls the function again
     if (pitch-5 > tune):
-        msgbox(pitchtoohigh, appTitle)
+        msgbox(pitchtoohigh + " " + str(pitch), appTitle)
         button = buttonbox("Que desea hacer?", appTitle, tunningOptions)
         transform(string)
     # if the pitch is too low it will tell
     elif(pitch+5 < tune):
-        msgbox(pitchtoolow, appTitle)
+        msgbox(pitchtoolow + " " + str(pitch), appTitle)
         button = buttonbox("Que desea hacer?", appTitle, tunningOptions)
         transform(string)
     #it the pitch isnt too high or too low then its ready to go
